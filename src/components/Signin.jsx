@@ -66,7 +66,9 @@ export default function Signin() {
             <input ref={username} className="form-control col-12 m-auto mb-2" type="text" placeholder="Tên người dùng (Tên mà mọi người sẽ thấy bạn)"/>
         </div>
         <div className="col-6 row me-auto mb-4 p-0">
-          <button onClick={() => setAccount()} className="btn btn-danger fw-bold">Quay lại</button>
+          <button onClick={() => setAccount(
+            { email: '', password: '', username: '' }
+          )} className="btn btn-danger fw-bold">Quay lại</button>
         </div>
         <div className="col-6 row ms-auto mb-4 p-0">
           <button onClick={SigninFunction} className="btn btn-success fw-bold">Đăng ký tài khoản</button>

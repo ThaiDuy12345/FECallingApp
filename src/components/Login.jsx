@@ -10,10 +10,12 @@ export default function Login() {
   const email = useRef()
   const password = useRef()
   const Login = () => {
+    alert("Đăng đăng nhập")
     axios.post("https://sirikakire-chat.herokuapp.com/api/Account/getAccount", {
         email: email.current.value,
         password: password.current.value
     }).then(res => {
+      alert("Đang xử lý dữ liệu")
       if(res.data === null){
         alert("Đăng nhập thất bại")
         return
