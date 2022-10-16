@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 export default function Signin() {
   const [account, setAccount] = useState(
     { email: '', password: '', username: '' }
   )
+  const navigate = useNavigate()
   const email = useRef()
   const password = useRef()
   const username = useRef()
   const SigninFunction = () => {
-    alert(`${account.email}, ${account.password}, ${username.current.value}`)
     axios.post("https://sirikakire-chat.herokuapp.com/api/Account/getAccount", {
         email: account.email,
         password: account.password
@@ -24,7 +25,7 @@ export default function Signin() {
           }
           alert("Tạo tài khoản thành công")
           localStorage.setItem("AccountID", res.data._id)
-          window.location.reload();
+          navigate("/")
         })
       }else{
         alert("Đăng nhập thất bại")

@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 export default function Login() {
+  const navigate = useNavigate()
   const [account, setAccount] = useState({
     email: '',
     password: ''
@@ -17,9 +18,8 @@ export default function Login() {
         alert("Đăng nhập thất bại")
         return
       }
-      alert(res.data._id)
       localStorage.setItem("AccountID", res.data._id)
-      window.location.reload();
+      navigate("/")
     })
   }
   return (
