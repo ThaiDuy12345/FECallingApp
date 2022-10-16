@@ -1,11 +1,9 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 export default function Signin() {
   const [account, setAccount] = useState(
     { email: '', password: '', username: '' }
   )
-  const navigate = useNavigate()
   const email = useRef()
   const password = useRef()
   const username = useRef()
@@ -25,7 +23,7 @@ export default function Signin() {
           }
           alert("Tạo tài khoản thành công")
           sessionStorage.setItem("AccountID", res.data._id)
-          navigate("/")
+          window.location.reload()
         })
       }else{
         alert("Đăng nhập thất bại")
