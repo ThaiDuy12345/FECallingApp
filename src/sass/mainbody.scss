@@ -1,0 +1,35 @@
+.MainBody{
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+    .MainApp{
+        background-color: rgb(33, 33, 51);
+        .navigativeButton{
+            background-color: rgb(23, 23, 31);
+        }
+        input:focus{
+            outline:none;
+            color:white;
+        }
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+      
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+       
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            border-radius:50px;
+            background: #888; 
+        }
+      
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    }
+    
+}
