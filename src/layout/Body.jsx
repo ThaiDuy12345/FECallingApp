@@ -5,7 +5,7 @@ import Signin from '../components/Signin'
 import MainBody from '../components/MainBody'
 import axios from 'axios'
 export default function Body() {
-  const [loggedIn, setLoggedIn ] = useState()
+  const [loggedIn, setLoggedIn ] = useState(false)
   useEffect(() => {
     setLoggedIn(checking)
   }, [])
