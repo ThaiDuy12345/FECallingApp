@@ -28,9 +28,9 @@ export default function Body() {
   }
   return (
     <Routes>
-      <Route path="*" element={loggedIn === false? <Navigate to="/login"/>:<MainBody/>}/>
+      <Route path="*" element={loggedIn === false? <Navigate replace to="/login"/>:<MainBody/>}/>
       <Route path="/login" element={loggedIn === false? <Login/>:<Navigate replace to="/"/>} />
-      <Route path="/signin" element={loggedIn === false? <Signin/>:<Navigate to="/"/>} />
+      <Route path="/signin" element={loggedIn === false? <Signin/>:<Navigate replace to="/"/>} />
     </Routes>
   )
 }
