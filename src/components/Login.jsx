@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 export default function Login() {
   const [account, setAccount] = useState({
     email: '',
@@ -35,7 +36,7 @@ export default function Login() {
           <button onClick={Login} className="btn btn-success col-12 m-auto font-weight-bold">Đăng nhập</button>
         </div>
         <div className="col-12 row m-0 mb-4 p-0">
-          <a href="/forgot" className="text-primary col-6 m-auto" style={{textAlign:'left'}}>Quên mật khẩu</a><a href="/signin" className="col-6 m-auto text-primary" style={{textAlign:'right'}}>Chưa có tài khoản? Đăng ký ngay</a>
+          <Link to="/forgot" className="text-primary col-6 m-auto" style={{textAlign:'left'}}>Quên mật khẩu</Link><Link to="/signin" className="col-6 m-auto text-primary" style={{textAlign:'right'}}>Chưa có tài khoản? Đăng ký ngay</Link>
         </div>
       </div>
     </div>
