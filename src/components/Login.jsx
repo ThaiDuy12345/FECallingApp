@@ -18,7 +18,8 @@ export default function Login() {
         alert("Đăng nhập thất bại")
         return
       }
-      localStorage.setItem("AccountID", res.data._id)
+      alert("Đăng nhập thành công")
+      sessionStorage.setItem("AccountID", res.data._id)
       navigate("/")
     })
   }

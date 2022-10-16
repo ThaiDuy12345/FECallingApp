@@ -21,13 +21,13 @@ export default function ChatDMRender({Objects}){
             console.log("có tin nhắn tới")
             if(
                 (
-                    message.from_id._id === localStorage.getItem('AccountID')
+                    message.from_id._id === sessionStorage.getItem('AccountID')
                     &&
                     message.to_id === id
                 )
                 ||
                 (
-                    message.to_id === localStorage.getItem('AccountID')
+                    message.to_id === sessionStorage.getItem('AccountID')
                     &&
                     message.from_id._id === id
                 )
@@ -41,7 +41,7 @@ export default function ChatDMRender({Objects}){
         }
     }, [id, allMessages])
     useEffect(() => {
-        const to = localStorage.getItem('AccountID')
+        const to = sessionStorage.getItem('AccountID')
         axios.post("https://sirikakire-chat.herokuapp.com/api/DMChat/GetChat", {
             user1_id: to,
             user2_id: id
@@ -62,7 +62,7 @@ export default function ChatDMRender({Objects}){
             type: 'dm',
             chatDate: new Date(),
             content:  message.current.value,
-            from_id: localStorage.getItem('AccountID'),
+            from_id: sessionStorage.getItem('AccountID'),
             to_id: id
         })
         message.current.value = ''
@@ -107,7 +107,7 @@ export default function ChatDMRender({Objects}){
         }
     }
     const MessageRender = (message) => {
-        if(message.message.from_id._id === localStorage.getItem('AccountID'))
+        if(message.message.from_id._id === sessionStorage.getItem('AccountID'))
         return(
             <div className="rounded m-0 mb-5 p-2 bg-primary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>

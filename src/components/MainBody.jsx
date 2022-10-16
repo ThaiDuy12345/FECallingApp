@@ -14,12 +14,12 @@ export default function MainBody() {
     useEffect(() => {
         console.log("react effect has render")
         axios.post("https://sirikakire-chat.herokuapp.com/api/Account/getAllAccount",{
-            _id:localStorage.getItem('AccountID')
+            _id:sessionStorage.getItem('AccountID')
         }).then(res => {
             setAllAccounts(res.data)
         })
         axios.post("https://sirikakire-chat.herokuapp.com/api/Group/getAllGroup",{
-            from_id:localStorage.getItem('AccountID')
+            from_id:sessionStorage.getItem('AccountID')
         }).then(res => {
             setAllGroups(res.data)
         })

@@ -24,7 +24,7 @@ export default function Signin() {
             return
           }
           alert("Tạo tài khoản thành công")
-          localStorage.setItem("AccountID", res.data._id)
+          sessionStorage.setItem("AccountID", res.data._id)
           navigate("/")
         })
       }else{

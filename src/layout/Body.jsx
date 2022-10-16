@@ -10,11 +10,11 @@ export default function Body() {
     setLoggedIn(checking)
   }, [])
   const checking = () => {
-    if(localStorage.getItem('AccountID') == null){
-      console.log('null localstorage')
+    if(sessionStorage.getItem('AccountID') == null){
+      console.log('null sessionStorage')
       return false
     }else{
-      axios.get(`https://sirikakire-chat.herokuapp.com/api/Account/getAccountWithId/${localStorage.getItem("AccountID")}`)
+      axios.get(`https://sirikakire-chat.herokuapp.com/api/Account/getAccountWithId/${sessionStorage.getItem("AccountID")}`)
       .then(res => {
         if (res.data == null) {
           console.log('id not found') 
