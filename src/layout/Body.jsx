@@ -5,10 +5,6 @@ import Signin from '../components/Signin'
 import MainBody from '../components/MainBody'
 import axios from 'axios'
 export default function Body() {
-  const [loggedIn, setLoggedIn ] = useState(false)
-  useEffect(() => {
-    setLoggedIn(checking)
-  }, [])
   const checking = () => {
     if(sessionStorage.getItem('AccountID') == null){
       console.log('null sessionStorage')
@@ -26,11 +22,23 @@ export default function Body() {
       })
     }
   }
+  const CheckHome = () => {
+    if (checking() === false) return <Navigate to="/login"/>
+    return <MainBody/>
+  }
+  const CheckLog = () => {
+    if (checking() === false) return <Login/>
+    return <Navigate to="/"/>
+  }
+  const CheckSign = () => {
+    if (checking() === false) return <Signin/>
+    return <Navigate to="/"/>
+  }
   return (
     <Routes>
-      <Route path="*" element={loggedIn === false? <Navigate to="/login"/>:<MainBody/>}/>
-      <Route path="/login" element={loggedIn === false? <Login/>:<Navigate to="/"/>} />
-      <Route path="/signin" element={loggedIn === false? <Signin/>:<Navigate to="/"/>} />
+      <Route path="/*" element={<CheckHome/>}/>
+      <Route path="/login" element={<CheckLog/>} />
+      <Route path="/signin" element={<CheckSign/>} />
     </Routes>
   )
 }

@@ -6,7 +6,6 @@ import ChatGroupRender from './ChatGroupRender'
 import { Routes, Route } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
-import { io } from 'socket.io-client'
 export default function MainBody() {
     const [messageState, setMessageState] = useState(true)
     const [allAccounts, setAllAccounts] = useState([])
