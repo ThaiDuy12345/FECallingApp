@@ -11,6 +11,18 @@
             outline:none;
             color:white;
         }
+        .modal{
+            input{
+                background-color:rgb(216, 216, 216);
+                border:none;
+                box-shadow: none;
+                outline:none;
+                color:white;
+                &:focus{
+                    border:none;
+                }
+            }
+        }
         ::-webkit-scrollbar {
             width: 7px;
         }

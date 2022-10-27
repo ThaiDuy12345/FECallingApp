@@ -150,7 +150,7 @@ export default function ChatDMRender({Objects}){
             </div>
             <div className="w-100 center m-0 p-0" style={{height:'15%'}}>
                 <div className="text-start row" style={{width:'95%'}}>
-                    <input  ref={message} onKeyDown={event => submit(event)} onKeyUp={buttonChange} className="me-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',width:'100%',background:'none', border:'0.5px solid white'}}/>
+                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={buttonChange} className="me-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',width:'100%',background:'none', border:'0.5px solid white'}}/>
                     <button onClick={sendMessage} ref={submitButton} className="btn ms-auto btn-success text-center text-light rounded-3" style={{display:'none',transition:'0.1s',padding:'5px',width:'0%', background:'none', border:'none'}}><FontAwesomeIcon style={{display:'none'}} ref={sendIcon} icon="fa-solid fa-paper-plane" /></button>
                 </div>
             </div>
