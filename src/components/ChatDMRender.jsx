@@ -178,7 +178,7 @@ export default function ChatDMRender({Objects}){
                 </div>
             </div>
             <div className="w-100 center m-0 pt-3 pb-3 ps-2 pe-2" style={{height:'70%'}}>
-                <div ref={element} className="w-100 h-100 text-start" style={{overflowY:'auto'}}>
+                <div ref={element} className="w-100 h-100 pe-1 text-start" style={{overflowY:'auto'}}>
                     {
                         allMessages.map(message => <MessageRender key={message._id} message={message}/>)
                     }
