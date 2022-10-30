@@ -12,7 +12,7 @@ const JoinGroupModal = () => {
             joinGroupButton.current.disabled = false
             return
         }
-        if(groupID.current.value.length !== 24){
+        if(groupID.current.value.trim().length !== 24){
             alert("The group id is not available")
             joinGroupButton.current.disabled = false
             return
