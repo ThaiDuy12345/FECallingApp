@@ -123,7 +123,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         }
     }
     const MessageRender = (message) => {
-        if(message.message.content === "Không hiển thị nội dung vì người dùng đã rời khỏi nhóm")
+        if(message.message.content === "The message was deleted")
         return(
             <div className="rounded m-0 mb-5 p-2 bg-secondary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
