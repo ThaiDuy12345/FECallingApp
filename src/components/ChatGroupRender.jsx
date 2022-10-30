@@ -124,10 +124,10 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         )
         if(message.message.from_id._id === sessionStorage.getItem('AccountID'))
         return(
-            <div className="rounded m-0 mb-5 p-2 bg-primary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
+            <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-light">{timeSince(new Date(message.message.chatDate))}</span>
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="dotText fst-italic text-light">{timeSince(new Date(message.message.chatDate))}</span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
@@ -171,6 +171,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         return (
             <>
                 <button onClick={() => {
+                    checkSendButton()
                     message.current.value = message.current.value + Icon
                 }} className="col border-0 icon">{Icon}</button>
             </>

@@ -4,6 +4,9 @@
     }
     .MainApp{
         background-color: rgb(33, 33, 51);
+        .bg-mainColor{
+            background-color: rgb(23, 23, 31);
+        }
         .icon{
             background-color: rgb(255, 255, 255);
             transition: 0.2s;
