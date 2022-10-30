@@ -9,6 +9,7 @@ const CreateGroupModal = ({allAccounts}) => {
     })
     const groupName = useRef()
     const joinGroupEmailInput = useRef()
+    const createGroupButton = useRef()
     function JoiningGroupAccount({account}){
         return(
             <button onClick={() => {
@@ -22,7 +23,9 @@ const CreateGroupModal = ({allAccounts}) => {
     }
     function RecommendAccount({account}) {
         return(
-            <option value={account.email}/>
+            <>
+                <option value={account.email}/>
+            </>
         )
     }
     function checkEmailInSystem(email){
@@ -40,7 +43,9 @@ const CreateGroupModal = ({allAccounts}) => {
         })
 
     }
+    
     function createGroup(){
+        createGroupButton.current.disabled = true
         axios.post(api.createGroup,{
             _id: sessionStorage.getItem("AccountID"),
             groupName: allGroupAccount.groupName,
@@ -85,7 +90,7 @@ const CreateGroupModal = ({allAccounts}) => {
                             </div>
                         </div>
                         <div className="col-12 mb-2">
-                            <button disabled={allGroupAccount.groupAccounts.length>0 && allGroupAccount.groupName !== ''? false:true} onClick={ createGroup } className="w-100 btn btn-primary">Create</button>
+                            <button ref={createGroupButton} disabled={allGroupAccount.groupAccounts.length>0 && allGroupAccount.groupName !== ''? false:true} onClick={ createGroup } className="w-100 btn btn-primary">Create</button>
                         </div>
                     </div>
                 </div>

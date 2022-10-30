@@ -4,9 +4,17 @@ import axios from 'axios'
 import api from '../API/api'
 const JoinGroupModal = () => {
     const groupID = useRef();
+    const joinGroupButton = useRef()
     const joinGroup = () => {
+        joinGroupButton.current.disabled = true
         if(groupID.current.value === ''){
             alert("The group id cannot be empty")
+            joinGroupButton.current.disabled = false
+            return
+        }
+        if(groupID.current.value.length !== 24){
+            alert("The group id is not available")
+            joinGroupButton.current.disabled = false
             return
         }
         axios.put(api.joinGroup,{
@@ -14,7 +22,8 @@ const JoinGroupModal = () => {
             group_id: groupID.current.value 
         }).then(res => {
             if(res.data === null){
-                alert("Failed to join group, please try again")
+                alert("Failed to join, group you join may not exist, please try again")
+                joinGroupButton.current.disabled = false
                 return
             }
             window.location.href = `/message/g/${res.data._id}`
@@ -32,7 +41,7 @@ const JoinGroupModal = () => {
                             <input ref={groupID} type="text" required placeholder="Insert group id" minLength="24" maxLength="24" size="24" className="fw-bold text-dark form-control form-control-lg"/>
                         </div>
                         <div className="col-12 mb-2">
-                            <button onClick={joinGroup} className="w-100 btn btn-primary">Join</button>
+                            <button ref={joinGroupButton} onClick={joinGroup} className="w-100 btn btn-primary">Join</button>
                         </div>
                     </div>
                 </div>

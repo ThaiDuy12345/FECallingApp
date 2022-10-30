@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import Moment from 'moment'
 import Icon from '../Data/Icon'
 import io from 'socket.io-client'
 import api from '../API/api'
@@ -67,6 +66,30 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
             }
         }
     }
+    const timeSince = (date) => {
+        var seconds = Math.floor((new Date() - date) / 1000);
+        var interval = seconds / 31536000;
+        if (interval > 1) {
+          return Math.floor(interval) + " năm trước";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+          return Math.floor(interval) + " tháng trước";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+          return Math.floor(interval) + " ngày trước";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+          return Math.floor(interval) + " tiếng trước";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+          return Math.floor(interval) + " phút trước";
+        }
+        return Math.floor(seconds) + " giây trước";
+    }
     const buttonChange = (event) => {
         if(message.current.value.length > 0){
             setTimeout(
@@ -105,7 +128,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
             <div className="rounded m-0 mb-5 p-2 bg-secondary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{Moment(message.message.chatDate).format('DD-MM-yyyy')}</span>
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{timeSince(new Date(message.message.chatDate))}</span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span className="text-decoration-line-through" style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
@@ -118,7 +141,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
             <div className="rounded m-0 mb-5 p-2 bg-primary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{Moment(message.message.chatDate).format('DD-MM-yyyy')}</span>
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{timeSince(new Date(message.message.chatDate))}</span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
@@ -130,7 +153,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
             <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-secondary">{Moment(message.message.chatDate).format('DD-MM-yyyy')}</span>
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-secondary">{timeSince(new Date(message.message.chatDate))}</span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>

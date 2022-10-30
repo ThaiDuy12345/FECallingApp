@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useParams } from 'react-router-dom'
 import api from '../API/api'
 import axios from 'axios'
-import Moment from 'moment'
 import Icon from '../Data/Icon'
 import io from 'socket.io-client'
 export default function ChatDMRender({Objects}){
@@ -21,7 +20,6 @@ export default function ChatDMRender({Objects}){
     useEffect(() => {
         socket.current = io("https://sirikakire-chat.herokuapp.com/")
         socket.current.on('user-chat', (message) => {
-            console.log("có tin nhắn tới")
             if(
                 (
                     message.from_id._id === sessionStorage.getItem('AccountID')
@@ -118,13 +116,37 @@ export default function ChatDMRender({Objects}){
             </>
         )
     } 
+    const timeSince = (date) => {
+        var seconds = Math.floor((new Date() - date) / 1000);
+        var interval = seconds / 31536000;
+        if (interval > 1) {
+          return Math.floor(interval) + " năm trước";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+          return Math.floor(interval) + " tháng trước";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+          return Math.floor(interval) + " ngày trước";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+          return Math.floor(interval) + " tiếng trước";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+          return Math.floor(interval) + " phút trước";
+        }
+        return Math.floor(seconds) + " giây trước";
+    }
     const MessageRender = (message) => {
         if(message.message.from_id._id === sessionStorage.getItem('AccountID'))
         return(
             <div className="rounded m-0 mb-5 p-2 bg-primary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{Moment(message.message.chatDate).format('DD-MM-yyyy')}</span>
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{timeSince(new Date(message.message.chatDate))}</span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
@@ -136,7 +158,7 @@ export default function ChatDMRender({Objects}){
             <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-secondary">{Moment(message.message.chatDate).format('DD-MM-yyyy')}</span>
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-secondary">{timeSince(new Date(message.message.chatDate))}</span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
