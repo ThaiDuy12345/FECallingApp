@@ -211,7 +211,7 @@ export default function ChatDMRender({Objects}){
             </div>
             <div className="w-100 center m-0 p-0" style={{height:'15%'}}>
                 <div className="text-start row " style={{width:'95%'}}>
-                    <div className="drop-down m-0 p-0" style={{width:'5%'}}>
+                    <div className="drop-down m-0 p-0" style={{width:'5%', minWidth:'20px'}}>
                         <button data-bs-toggle="dropdown" aria-expanded="false" className="h-100 w-100 fs-5 m-0 p-0 border-0 text-light" style={{background:'none'}}><FontAwesomeIcon icon="fa-solid fa-face-smile" /></button>
                         <div className="dropdown-menu" style={{maxWidth:"250px"}}>
                             {data.map(icon => <RenderIcon key={icon} Icon={icon}/>)}
