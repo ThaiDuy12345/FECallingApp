@@ -85,13 +85,13 @@ export default function ChatDMRender({Objects}){
     }
     const VolumeRender = () => {
         return (
-            <span onClick={() => setVolume(false)}><FontAwesomeIcon icon="fa-solid fa-volume-high"/></span>
+            <span className="text-light fw-bold rounded-5 p-2 bg-success" onClick={() => setVolume(false)}>Sound on &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-high"/></span>
         )
         
     }
     const MuteVolumeRender = () => {
         return (
-            <span onClick={() => setVolume(true)}><FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></span>
+            <span className="fw-bold text-light rounded-5 p-2 bg-danger" onClick={() => setVolume(true)}>Mute &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></span>
         )
     }
     const buttonChange = (event) => {
