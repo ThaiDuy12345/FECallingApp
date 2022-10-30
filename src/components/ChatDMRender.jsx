@@ -12,7 +12,6 @@ export default function ChatDMRender({Objects}){
     const message = useRef();
     const element = useRef();
     const submitButton = useRef();
-    const sendIcon = useRef();
     const [allMessages, setAllMessages] = useState([])
     const [data, setData] = useState(Icon)
     const [volume, setVolume] = useState(true)
@@ -67,6 +66,7 @@ export default function ChatDMRender({Objects}){
         )
     }
     const sendMessage = () => {
+        if(message.current.value.trim() === '' || message.current.value.trim().length === 0) return
         socket.current.emit('on-chat',{
             type: 'dm',
             chatDate: new Date(),
@@ -93,38 +93,6 @@ export default function ChatDMRender({Objects}){
         return (
             <button className="dropdown-item fw-bold text-danger" onClick={() => setVolume(true)}>Mute &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></button>
         )
-    }
-    const buttonChange = (event) => {
-        if(message.current.value.length !== 0){
-            setTimeout(
-                () => {
-                    submitButton.current.style.background = ''
-                    submitButton.current.style.border = ''   
-                    submitButton.current.style.width = '12%'
-                },
-                100,
-            );
-            setTimeout(
-                () => {
-                    sendIcon.current.style.display = 'var(--fa-display, inline-block)';
-                },
-                150,
-            );
-            setTimeout(
-                () => {
-                    submitButton.current.style.display = 'block'
-                },
-                50,
-            );
-            message.current.style.width = "80%"
-        }else{
-            sendIcon.current.style.display = 'none';
-            submitButton.current.style.display = 'none'
-            submitButton.current.style.background = 'none'
-            submitButton.current.style.border = 'none'
-            submitButton.current.style.width = '0%'
-            message.current.style.width = "95%"
-        }
     }
     const RenderIcon = ({Icon}) => {
         return (
@@ -158,6 +126,13 @@ export default function ChatDMRender({Objects}){
           return Math.floor(interval) + " phút trước";
         }
         return Math.floor(seconds) + " giây trước";
+    }
+    const checkSendButton = () => {
+        if(message.current.value.trim() === '' || message.current.value.trim().length === 0){
+            submitButton.current.disabled = true
+        }else{
+            submitButton.current.disabled = false
+        }
     }
     const MessageRender = (message) => {
         if(message.message.from_id._id === sessionStorage.getItem('AccountID'))
@@ -211,14 +186,14 @@ export default function ChatDMRender({Objects}){
             </div>
             <div className="w-100 center m-0 p-0" style={{height:'15%'}}>
                 <div className="text-start row " style={{width:'95%'}}>
-                    <div className="drop-down m-0 p-0" style={{width:'5%', minWidth:'20px'}}>
+                    <div className="drop-down col-1 m-0 p-0">
                         <button data-bs-toggle="dropdown" aria-expanded="false" className="h-100 w-100 fs-5 m-0 p-0 border-0 text-light" style={{background:'none'}}><FontAwesomeIcon icon="fa-solid fa-face-smile" /></button>
                         <div className="dropdown-menu" style={{maxWidth:"250px"}}>
                             {data.map(icon => <RenderIcon key={icon} Icon={icon}/>)}
                         </div>
                     </div>
-                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={buttonChange} className="me-auto fw-bold rounded-3" style={{width:"90%",transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
-                    <button onClick={sendMessage} ref={submitButton} className="btn ms-auto btn-success text-center text-light rounded-3" style={{display:'none',transition:'0.1s',padding:'5px',width:'0%', background:'none', border:'none'}}><FontAwesomeIcon style={{display:'none'}} ref={sendIcon} icon="fa-solid fa-paper-plane" /></button>
+                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-9 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
+                    <button disabled onClick={sendMessage} ref={submitButton} className="col-1 btn ms-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
                 </div>
             </div>
         </div>
