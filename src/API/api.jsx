@@ -31,12 +31,27 @@ const apiList = {
     Send: account's from_id and account's to_id
     Return: all messages of those two accounts
     */
-    getDMMessagesChat: `${host}DMChat/GetChat`,
+    getDMMessagesChat: `${host}DMChat/getChat`,
+    /*
+    Send: account's to_id
+    Return: all messages of from the group
+    */
+    getGroupMessagesChat: `${host}GroupChat/getChat`,
     /*
     Send: Account's Id, group's name and all accounts gotta be added into this group
     Return: The group object that have been created
     */
-    createGroup: `${host}Group/CreateGroup`
+    createGroup: `${host}Group/createGroup`,
+    /*
+    Send: Account's Id and group's Id
+    Return: The group object that the account have joined
+    */
+    joinGroup: `${host}Group/joinGroup`,
+    /*
+    Send: Account's Id and group's Id
+    Return: The group that the account have leave
+    */
+    leaveGroup: `${host}Group/leaveGroup`
 }
 
 

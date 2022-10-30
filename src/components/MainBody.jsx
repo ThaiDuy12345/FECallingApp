@@ -91,7 +91,7 @@ export default function MainBody() {
                     <Routes>
                         <Route path="/" element={<MainRender/>}/>
                         <Route path="/message/dm/:id" element={<ChatDMRender Objects={allAccounts}/> }/>
-                        <Route path="/message/g/:id" element={<ChatGroupRender Objects={allGroups}/>}/>
+                        <Route path="/message/g/:id" element={<ChatGroupRender Objects={allGroups} allGroups={allGroups} setAllGroups={setAllGroups}/>}/>
                     </Routes>
                 </div>
             </div>

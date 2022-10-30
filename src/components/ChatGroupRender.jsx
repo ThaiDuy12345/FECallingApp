@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Moment from 'moment'
 import Icon from '../Data/Icon'
 import io from 'socket.io-client'
-export default function ChatGroupRender({Objects}){
+import api from '../API/api'
+export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     const socket = useRef()
-    let { id } = useParams();
-    const message = useRef();
-    const element = useRef();
-    const submitButton = useRef();
-    const sendIcon = useRef();
-    const [data, setDate] = useState(Icon)
+    let { id } = useParams()
+    const message = useRef()
+    const navigate = useNavigate()
+    const element = useRef()
+    const submitButton = useRef()
+    const sendIcon = useRef()
+    const [data, setData] = useState(Icon)
     const [allMessages, setAllMessages] = useState([])
     useEffect(() => {
-        element.current.scrollTop = element.current.scrollHeight;
+        element.current.scrollTop = element.current.scrollHeight
     })
     useEffect(() => {
         socket.current = io("https://sirikakire-chat.herokuapp.com/")
@@ -33,7 +35,7 @@ export default function ChatGroupRender({Objects}){
     }, [id, allMessages])
     useEffect(() => {
         const to = sessionStorage.getItem('AccountID')
-        axios.post("https://sirikakire-chat.herokuapp.com/api/GroupChat/GetChat", {
+        axios.post(api.getGroupMessagesChat, {
             user1_id: to,
             user2_id: id
         }).then(res => {
@@ -98,6 +100,19 @@ export default function ChatGroupRender({Objects}){
         }
     }
     const MessageRender = (message) => {
+        if(message.message.content === "Không hiển thị nội dung vì người dùng đã rời khỏi nhóm")
+        return(
+            <div className="rounded m-0 mb-5 p-2 bg-secondary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
+                <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
+                    <div className="text-start">
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold">{message.message.from_id.name}</span> - <span className="text-light">{Moment(message.message.chatDate).format('DD-MM-yyyy')}</span>
+                    </div>
+                    <div className="text-start" style={{maxWidth:'100%'}}>
+                        <span className="text-decoration-line-through" style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
+                    </div>
+                </div>
+            </div>
+        )
         if(message.message.from_id._id === sessionStorage.getItem('AccountID'))
         return(
             <div className="rounded m-0 mb-5 p-2 bg-primary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
@@ -124,6 +139,25 @@ export default function ChatGroupRender({Objects}){
             </div>
         )
     }
+    const leaveGroup = () => {
+        axios.put(api.leaveGroup,{
+            _id: sessionStorage.getItem("AccountID"),
+            group_id: id
+        }).then(res => {
+            if(res.data === null){
+                alert("Failed to leave the group, please try again")
+                return
+            }
+            for(var i = 0; i < allGroups.length; i++){
+                if(allGroups[i]._id === res.data._id){
+                    allGroups.splice(allGroups.indexOf(allGroups[i]), 1)
+                    setAllGroups([...allGroups])
+                    navigate("/")
+                    break
+                }
+            }
+        })
+    }
     const RenderIcon = ({Icon}) => {
         return (
             <>
@@ -133,7 +167,6 @@ export default function ChatGroupRender({Objects}){
             </>
         )
     } 
-    //const socket = io("ws://localhost:5000")
     return(
         <div className="w-100 h-100 m-0 p-0 text-light">
             <div className="w-100 center m-0 p-0" style={{height:'15%',boxShadow:'0px 3px 3px #000316'}}>
@@ -146,8 +179,8 @@ export default function ChatGroupRender({Objects}){
                         <FontAwesomeIcon icon="fa-solid fa-bars" />
                     </button>
                     <ul className="dropdown-menu">
-                        <span className="dropdown-item-text" href="#d"><FontAwesomeIcon icon="fa-solid fa-plus" /> &nbsp;Group id: <b>{id}</b></span>
-                        <button className="dropdown-item text-danger" href="#d"><FontAwesomeIcon icon="fa-solid fa-right-from-bracket" /> &nbsp;Leave this group</button>
+                        <span className="dropdown-item-text"><FontAwesomeIcon icon="fa-solid fa-plus" /> &nbsp;Group id: <b>{id}</b></span>
+                        <button className="dropdown-item text-danger" onClick={leaveGroup}><FontAwesomeIcon icon="fa-solid fa-right-from-bracket" /> &nbsp;Leave this group</button>
                     </ul>
                 </div>
             </div>

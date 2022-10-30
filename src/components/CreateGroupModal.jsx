@@ -47,7 +47,7 @@ const CreateGroupModal = ({allAccounts}) => {
             groupAccounts: allGroupAccount.groupAccounts
         }).then(res => {
             if(res.data === null){
-                alert("Tạo nhóm thất bại")
+                alert("Failed to create new group, please try again")
             }
             window.location.href= `/message/g/${res.data._id}`
         })
