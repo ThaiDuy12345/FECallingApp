@@ -31,7 +31,7 @@ export default function Signin() {
             signinButton.current.disabled = false
             return
           }
-          alert("Succesfully created new account")
+          alert("Successfully created new account")
           sessionStorage.setItem("AccountID", res.data._id)
           window.location.reload()
         })
