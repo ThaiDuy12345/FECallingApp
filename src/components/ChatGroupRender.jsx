@@ -76,13 +76,13 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     }
     const VolumeRender = () => {
         return (
-            <span className="text-light fw-bold rounded-5 p-2 bg-success" onClick={() => setVolume(false)}>Sound on &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-high"/></span>
+            <button className="dropdown-item fw-bold text-success" onClick={() => setVolume(false)}>Sound on &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-high"/></button>
         )
         
     }
     const MuteVolumeRender = () => {
         return (
-            <span className="fw-bold text-light rounded-5 p-2 bg-danger" onClick={() => setVolume(true)}>Mute &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></span>
+            <button className="dropdown-item fw-bold text-danger" onClick={() => setVolume(true)}>Mute &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></button>
         )
     }
     const timeSince = (date) => {
@@ -212,23 +212,23 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     return(
         <div className="w-100 h-100 m-0 p-0 text-light">
             <div className="w-100 center m-0 p-0" style={{height:'15%',boxShadow:'0px 3px 3px #000316'}}>
-                <div className="text-start" style={{width:'45%'}}>
+                <div className="text-start dotText" style={{width:'45%'}}>
                     <FontAwesomeIcon icon="fa-solid fa-people-group" />
                     &nbsp; <GetName/>
-                    &nbsp; {volume === true? <VolumeRender />:<MuteVolumeRender />}
                 </div>
                 <div className="drop-down text-end" style={{width:'45%'}}>
                     <button className="settingButton" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                         <FontAwesomeIcon icon="fa-solid fa-bars" />
                     </button>
                     <ul className="dropdown-menu">
+                        {volume === true? <VolumeRender />:<MuteVolumeRender />}
                         <span className="dropdown-item-text"><FontAwesomeIcon icon="fa-solid fa-plus" /> &nbsp;Group id: <b>{id}</b></span>
                         <button className="dropdown-item text-danger" onClick={leaveGroup}><FontAwesomeIcon icon="fa-solid fa-right-from-bracket" /> &nbsp;Leave this group</button>
                     </ul>
                 </div>
             </div>
             <div className="w-100 center m-0 pt-3 pb-3 ps-2 pe-2" style={{height:'70%'}}>
-                <div ref={element} className="w-100 h-100 text-start" style={{overflowY:'auto'}}>
+                <div ref={element} className="w-100 h-100 pe-1 text-start" style={{overflowY:'auto'}}>
                     {
                         allMessages.map(message => <MessageRender key={message._id} message={message}/>)
                     }

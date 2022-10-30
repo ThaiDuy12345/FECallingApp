@@ -85,13 +85,13 @@ export default function ChatDMRender({Objects}){
     }
     const VolumeRender = () => {
         return (
-            <span className="text-light fw-bold rounded-5 p-2 bg-success" onClick={() => setVolume(false)}>Sound on &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-high"/></span>
+            <button className="dropdown-item fw-bold text-success" onClick={() => setVolume(false)}>Sound on &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-high"/></button>
         )
         
     }
     const MuteVolumeRender = () => {
         return (
-            <span className="fw-bold text-light rounded-5 p-2 bg-danger" onClick={() => setVolume(true)}>Mute &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></span>
+            <button className="dropdown-item fw-bold text-danger" onClick={() => setVolume(true)}>Mute &nbsp;<FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></button>
         )
     }
     const buttonChange = (event) => {
@@ -189,10 +189,17 @@ export default function ChatDMRender({Objects}){
     return(
         <div className="w-100 h-100 m-0 p-0 text-light">
             <div className="w-100 center m-0 p-0" style={{height:'15%',boxShadow:'0px 3px 3px #000316'}}>
-                <div className="text-start" style={{width:'90%'}}>
+                <div className="text-start dotText" style={{width:'45%'}}>
                     <FontAwesomeIcon icon="fa-solid fa-user" />
                     &nbsp; <GetName/>
-                    &nbsp; {volume === true? <VolumeRender />:<MuteVolumeRender />}
+                </div>
+                <div className="drop-down text-end" style={{width:'45%'}}>
+                    <button className="settingButton" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        <FontAwesomeIcon icon="fa-solid fa-bars" />
+                    </button>
+                    <ul className="dropdown-menu">
+                        {volume === true? <VolumeRender />:<MuteVolumeRender />}
+                    </ul>
                 </div>
             </div>
             <div className="w-100 center m-0 pt-3 pb-3 ps-2 pe-2" style={{height:'70%'}}>
