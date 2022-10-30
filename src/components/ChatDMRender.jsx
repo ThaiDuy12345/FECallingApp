@@ -185,15 +185,15 @@ export default function ChatDMRender({Objects}){
                 </div>
             </div>
             <div className="w-100 center m-0 p-0" style={{height:'15%'}}>
-                <div className="text-start row " style={{width:'95%'}}>
+                <div className="text-start row m-auto" style={{width:'95%'}}>
                     <div className="drop-down col-1 m-0 p-0">
                         <button data-bs-toggle="dropdown" aria-expanded="false" className="h-100 w-100 fs-5 m-0 p-0 border-0 text-light" style={{background:'none'}}><FontAwesomeIcon icon="fa-solid fa-face-smile" /></button>
                         <div className="dropdown-menu" style={{maxWidth:"250px"}}>
                             {data.map(icon => <RenderIcon key={icon} Icon={icon}/>)}
                         </div>
                     </div>
-                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-9 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
-                    <button disabled onClick={sendMessage} ref={submitButton} className="col-1 btn ms-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
+                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-8 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
+                    <button disabled onClick={sendMessage} ref={submitButton} className="col-2 btn m-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
                 </div>
             </div>
         </div>

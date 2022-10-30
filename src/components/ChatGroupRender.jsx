@@ -216,8 +216,8 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                             {data.map(icon => <RenderIcon key={icon} Icon={icon}/>)}
                         </div>
                     </div>
-                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-9 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
-                    <button disabled onClick={sendMessage} ref={submitButton} className="col-1 btn ms-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
+                    <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-8 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
+                    <button disabled onClick={sendMessage} ref={submitButton} className="col-2 btn ms-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
                 </div>
             </div>
         </div>
