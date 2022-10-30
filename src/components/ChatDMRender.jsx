@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import api from '../API/api'
 import axios from 'axios'
 import Icon from '../Data/Icon'
+import sound from "../Data/Sound.mp3"
 import io from 'socket.io-client'
 export default function ChatDMRender({Objects}){
     const socket = useRef()
@@ -14,6 +15,7 @@ export default function ChatDMRender({Objects}){
     const sendIcon = useRef();
     const [allMessages, setAllMessages] = useState([])
     const [data, setData] = useState(Icon)
+    const [volume, setVolume] = useState(true)
     useEffect(() => {
         element.current.scrollTop = element.current.scrollHeight;
     })
@@ -34,13 +36,19 @@ export default function ChatDMRender({Objects}){
                 )
             ){
                 setAllMessages(oldArray => [...oldArray, message])
+                if(message.from_id._id !== sessionStorage.getItem('AccountID') && volume === true){
+                    const audio = new Audio(sound);
+                    audio.play()
+                    .then(() => console.log("play audio successfully"))
+                    .catch(() => console.log("play audio failed"))
+                }
                 console.log(allMessages.length)
             }
         })
         return () => {
             socket.current.disconnect()
         }
-    }, [id, allMessages])
+    }, [id, allMessages, volume])
     useEffect(() => {
         const to = sessionStorage.getItem('AccountID')
         axios.post(api.getDMMessagesChat, {
@@ -74,6 +82,17 @@ export default function ChatDMRender({Objects}){
                 sendMessage()
             }
         }
+    }
+    const VolumeRender = () => {
+        return (
+            <span onClick={() => setVolume(false)}><FontAwesomeIcon icon="fa-solid fa-volume-high"/></span>
+        )
+        
+    }
+    const MuteVolumeRender = () => {
+        return (
+            <span onClick={() => setVolume(true)}><FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></span>
+        )
     }
     const buttonChange = (event) => {
         if(message.current.value.length !== 0){
@@ -173,6 +192,7 @@ export default function ChatDMRender({Objects}){
                 <div className="text-start" style={{width:'90%'}}>
                     <FontAwesomeIcon icon="fa-solid fa-user" />
                     &nbsp; <GetName/>
+                    &nbsp; {volume === true? <VolumeRender />:<MuteVolumeRender />}
                 </div>
             </div>
             <div className="w-100 center m-0 pt-3 pb-3 ps-2 pe-2" style={{height:'70%'}}>

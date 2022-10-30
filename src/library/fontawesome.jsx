@@ -1,5 +1,4 @@
 // import the library
-import React from 'react'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { 
@@ -19,7 +18,9 @@ import {
     faCommentMedical,
     faUsersLine,
     faPeopleGroup,
-    faFaceSmile
+    faFaceSmile,
+    faVolumeHigh,
+    faVolumeXmark
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
     fab,
@@ -39,5 +40,7 @@ library.add(
     faCommentMedical,
     faUsersLine,
     faPeopleGroup,
-    faFaceSmile
+    faFaceSmile,
+    faVolumeHigh,
+    faVolumeXmark
 )

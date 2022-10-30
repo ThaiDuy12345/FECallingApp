@@ -5,6 +5,7 @@ import axios from 'axios'
 import Icon from '../Data/Icon'
 import io from 'socket.io-client'
 import api from '../API/api'
+import sound from '../Data/Sound.mp3'
 export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     const socket = useRef()
     let { id } = useParams()
@@ -15,6 +16,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     const sendIcon = useRef()
     const [data, setData] = useState(Icon)
     const [allMessages, setAllMessages] = useState([])
+    const [volume, setVolume] = useState(true)
     useEffect(() => {
         element.current.scrollTop = element.current.scrollHeight
     })
@@ -25,13 +27,19 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                 message.to_id === id
             ){
                 setAllMessages(oldArray => [...oldArray, message])
+                if(message.from_id._id !== sessionStorage.getItem('AccountID') && volume === true){
+                    const audio = new Audio(sound);
+                    audio.play()
+                    .then(() => {})
+                    .catch(() => {})
+                }
                 console.log(allMessages.length)
             }
         })
         return () => {
             socket.current.disconnect()
         }
-    }, [id, allMessages])
+    }, [id, allMessages, volume])
     useEffect(() => {
         const to = sessionStorage.getItem('AccountID')
         axios.post(api.getGroupMessagesChat, {
@@ -65,6 +73,17 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                 sendMessage()
             }
         }
+    }
+    const VolumeRender = () => {
+        return (
+            <span onClick={() => setVolume(false)}><FontAwesomeIcon icon="fa-solid fa-volume-high"/></span>
+        )
+        
+    }
+    const MuteVolumeRender = () => {
+        return (
+            <span onClick={() => setVolume(true)}><FontAwesomeIcon icon="fa-solid fa-volume-xmark"/></span>
+        )
     }
     const timeSince = (date) => {
         var seconds = Math.floor((new Date() - date) / 1000);
@@ -196,6 +215,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                 <div className="text-start" style={{width:'45%'}}>
                     <FontAwesomeIcon icon="fa-solid fa-people-group" />
                     &nbsp; <GetName/>
+                    &nbsp; {volume === true? <VolumeRender />:<MuteVolumeRender />}
                 </div>
                 <div className="drop-down text-end" style={{width:'45%'}}>
                     <button className="settingButton" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">

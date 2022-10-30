@@ -43,7 +43,7 @@ export default function Signin() {
     })
   }
   const nextForm = () => {
-    let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    let emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
     if(!emailRegex.test(email.current.value)){
       alert("Not a valid email, please try again")
