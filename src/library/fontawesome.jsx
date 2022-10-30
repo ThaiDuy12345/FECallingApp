@@ -12,7 +12,14 @@ import {
     faUser, 
     faForward,
     faUserGroup,
-    faPaperPlane
+    faPaperPlane,
+    faBars,
+    faRightFromBracket,
+    faPlus,
+    faCommentMedical,
+    faUsersLine,
+    faPeopleGroup,
+    faFaceSmile
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
     fab,
@@ -25,5 +32,12 @@ library.add(
     faUser, 
     faForward,
     faUserGroup,
-    faPaperPlane
+    faPaperPlane,
+    faBars,
+    faRightFromBracket,
+    faPlus,
+    faCommentMedical,
+    faUsersLine,
+    faPeopleGroup,
+    faFaceSmile
 )

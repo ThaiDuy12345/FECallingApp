@@ -4,13 +4,14 @@ import Login from '../components/Login'
 import Signin from '../components/Signin'
 import MainBody from '../components/MainBody'
 import axios from 'axios'
+import api from '../API/api'
 export default function Body() {
   const checking = () => {
     if(sessionStorage.getItem('AccountID') == null){
       console.log('null sessionStorage')
       return false
     }else{
-      axios.get(`https://sirikakire-chat.herokuapp.com/api/Account/getAccountWithId/${sessionStorage.getItem("AccountID")}`)
+      axios.get(api.getAccountWithId)
       .then(res => {
         if (res.data == null) {
           console.log('id not found') 

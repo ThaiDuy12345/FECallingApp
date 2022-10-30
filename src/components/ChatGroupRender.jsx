@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Moment from 'moment'
+import Icon from '../Data/Icon'
 import io from 'socket.io-client'
 export default function ChatGroupRender({Objects}){
     const socket = useRef()
@@ -11,6 +12,7 @@ export default function ChatGroupRender({Objects}){
     const element = useRef();
     const submitButton = useRef();
     const sendIcon = useRef();
+    const [data, setDate] = useState(Icon)
     const [allMessages, setAllMessages] = useState([])
     useEffect(() => {
         element.current.scrollTop = element.current.scrollHeight;
@@ -18,7 +20,6 @@ export default function ChatGroupRender({Objects}){
     useEffect(() => {
         socket.current = io("https://sirikakire-chat.herokuapp.com/")
         socket.current.on('user-chat', (message) => {
-            console.log("có tin nhắn tới")
             if(
                 message.to_id === id
             ){
@@ -65,13 +66,12 @@ export default function ChatGroupRender({Objects}){
         }
     }
     const buttonChange = (event) => {
-        alert(event)
         if(message.current.value.length > 0){
             setTimeout(
                 () => {
                     submitButton.current.style.background = ''
                     submitButton.current.style.border = ''   
-                    submitButton.current.style.width = '15%'
+                    submitButton.current.style.width = '12%'
                 },
                 100,
             );
@@ -94,7 +94,7 @@ export default function ChatGroupRender({Objects}){
             submitButton.current.style.background = 'none'
             submitButton.current.style.border = 'none'
             submitButton.current.style.width = '0%'
-            message.current.style.width = "100%"
+            message.current.style.width = "95%"
         }
     }
     const MessageRender = (message) => {
@@ -124,13 +124,31 @@ export default function ChatGroupRender({Objects}){
             </div>
         )
     }
+    const RenderIcon = ({Icon}) => {
+        return (
+            <>
+                <button onClick={() => {
+                    message.current.value = message.current.value + Icon
+                }} className="col border-0 icon">{Icon}</button>
+            </>
+        )
+    } 
     //const socket = io("ws://localhost:5000")
     return(
         <div className="w-100 h-100 m-0 p-0 text-light">
-            <div className="w-100 center m-0 p-0" style={{height:'15%',boxShadow:'0px 5px 5px #000316'}}>
-                <div className="text-start" style={{width:'90%'}}>
-                    <FontAwesomeIcon icon="fa-solid fa-user" />
+            <div className="w-100 center m-0 p-0" style={{height:'15%',boxShadow:'0px 3px 3px #000316'}}>
+                <div className="text-start" style={{width:'45%'}}>
+                    <FontAwesomeIcon icon="fa-solid fa-people-group" />
                     &nbsp; <GetName/>
+                </div>
+                <div className="drop-down text-end" style={{width:'45%'}}>
+                    <button className="settingButton" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        <FontAwesomeIcon icon="fa-solid fa-bars" />
+                    </button>
+                    <ul className="dropdown-menu">
+                        <span className="dropdown-item-text" href="#d"><FontAwesomeIcon icon="fa-solid fa-plus" /> &nbsp;Group id: <b>{id}</b></span>
+                        <button className="dropdown-item text-danger" href="#d"><FontAwesomeIcon icon="fa-solid fa-right-from-bracket" /> &nbsp;Leave this group</button>
+                    </ul>
                 </div>
             </div>
             <div className="w-100 center m-0 pt-3 pb-3 ps-2 pe-2" style={{height:'70%'}}>
@@ -142,7 +160,13 @@ export default function ChatGroupRender({Objects}){
             </div>
             <div className="w-100 center m-0 p-0" style={{height:'15%'}}>
                 <div className="text-start row" style={{width:'95%'}}>
-                    <input onKeyDown={event => submit(event)} onKeyUp={buttonChange} ref={message} className="me-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',width:'100%',background:'none', border:'0.5px solid white'}}/>
+                    <div className="drop-down m-0 p-0" style={{width:'5%'}}>
+                        <button data-bs-toggle="dropdown" aria-expanded="false" className="h-100 w-100 fs-5 m-0 p-0 border-0 text-light" style={{background:'none'}}><FontAwesomeIcon icon="fa-solid fa-face-smile" /></button>
+                        <div className="dropdown-menu" style={{maxWidth:"250px"}}>
+                            {data.map(icon => <RenderIcon key={icon} Icon={icon}/>)}
+                        </div>
+                    </div>
+                    <input onKeyDown={event => submit(event)} onKeyUp={buttonChange} ref={message} className="me-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',width:'95%',background:'none', border:'0.5px solid white'}}/>
                     <button onClick={sendMessage} ref={submitButton} className="btn ms-auto btn-success text-center text-light rounded-3" style={{display:'none',transition:'0.1s',padding:'5px',width:'0%', background:'none', border:'none'}}><FontAwesomeIcon style={{display:'none'}} ref={sendIcon} icon="fa-solid fa-paper-plane" /></button>
                 </div>
             </div>

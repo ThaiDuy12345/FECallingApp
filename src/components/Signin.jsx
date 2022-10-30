@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
+import api from '../API/api'
 export default function Signin() {
   const [account, setAccount] = useState(
     { email: '', password: '', username: '' }
@@ -8,12 +9,12 @@ export default function Signin() {
   const password = useRef()
   const username = useRef()
   const SigninFunction = () => {
-    axios.post("https://sirikakire-chat.herokuapp.com/api/Account/getAccount", {
+    axios.post(api.getAccountWithEmailAndPassword, {
         email: account.email,
         password: account.password
     }).then(res => {
       if(res.data === null){
-        axios.post("https://sirikakire-chat.herokuapp.com/api/Account/createAnAccount", {
+        axios.post(api.createAnAccount, {
           email: account.email,
           password: account.password,
           username: username.current.value
@@ -26,7 +27,7 @@ export default function Signin() {
           window.location.reload()
         })
       }else{
-        alert("Đăng nhập thất bại")
+        alert("Tạo tài khoản thất bại, email bạn bị trùng lặp")
         return
       }
     })

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import api from '../API/api'
 export default function Login() {
   const [account, setAccount] = useState({
     email: '',
@@ -9,7 +10,7 @@ export default function Login() {
   const email = useRef()
   const password = useRef()
   const Login = () => {
-    axios.post("https://sirikakire-chat.herokuapp.com/api/Account/getAccount", {
+    axios.post(api.getAccountWithEmailAndPassword, {
         email: email.current.value,
         password: password.current.value
     }).then(res => {
