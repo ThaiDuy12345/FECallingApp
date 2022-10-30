@@ -11,10 +11,10 @@ export default function ChatDMRender({Objects}){
     let { id } = useParams();
     const message = useRef();
     const element = useRef();
-    const submitButton = useRef();
     const [allMessages, setAllMessages] = useState([])
     const [data, setData] = useState(Icon)
     const [volume, setVolume] = useState(true)
+    const [sendButton, setSendButton] = useState(true)
     useEffect(() => {
         element.current.scrollTop = element.current.scrollHeight;
     })
@@ -66,7 +66,7 @@ export default function ChatDMRender({Objects}){
         )
     }
     const sendMessage = () => {
-        if(message.current.value.trim() === '' || message.current.value.trim().length === 0) return
+        if(message.current.value.trim() === '' || message.current.value.trim().length === 0) { return }
         socket.current.emit('on-chat',{
             type: 'dm',
             chatDate: new Date(),
@@ -129,9 +129,9 @@ export default function ChatDMRender({Objects}){
     }
     const checkSendButton = () => {
         if(message.current.value.trim() === '' || message.current.value.trim().length === 0){
-            submitButton.current.disabled = true
+            setSendButton(true)
         }else{
-            submitButton.current.disabled = false
+            setSendButton(false)
         }
     }
     const MessageRender = (message) => {
@@ -193,7 +193,7 @@ export default function ChatDMRender({Objects}){
                         </div>
                     </div>
                     <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-8 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
-                    <button disabled onClick={sendMessage} ref={submitButton} className="col-2 btn m-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
+                    <button disabled={sendButton} onClick={sendMessage} className="col-2 btn m-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>
                 </div>
             </div>
         </div>
