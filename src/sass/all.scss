@@ -3,7 +3,9 @@ html, body, #root{
     font-family: $font-family;
     height: 100%;
     width: 100%;
-    overflow: hidden;  
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
     /* width */
     ::-webkit-scrollbar {
         width: 7px;
