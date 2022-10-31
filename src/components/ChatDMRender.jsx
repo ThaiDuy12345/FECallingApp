@@ -99,6 +99,7 @@ export default function ChatDMRender({Objects}){
             <>
                 <button onClick={() => {
                     message.current.value = message.current.value + Icon
+                    checkSendButton()
                 }} className="col border-0 icon" style={{background:'none'}}>{Icon}</button>
             </>
         )

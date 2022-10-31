@@ -171,8 +171,8 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         return (
             <>
                 <button onClick={() => {
-                    checkSendButton()
                     message.current.value = message.current.value + Icon
+                    checkSendButton()
                 }} className="col border-0 icon">{Icon}</button>
             </>
         )
