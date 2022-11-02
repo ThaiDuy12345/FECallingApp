@@ -1,12 +1,15 @@
 import { useState, useRef } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom'
+import $ from 'jquery';
 import api from '../API/api'
-const CreateGroupModal = ({allAccounts}) => {
+const CreateGroupModal = ({allAccounts, allGroups, setAllGroups}) => {
     const [allGroupAccount, setAllGroupAccount] = useState({
         groupName: '',
         groupAccounts: []
     })
+    const navigate = useNavigate()
     const groupName = useRef()
     const joinGroupEmailInput = useRef()
     const createGroupButton = useRef()
@@ -54,7 +57,10 @@ const CreateGroupModal = ({allAccounts}) => {
             if(res.data === null){
                 alert("Failed to create new group, please try again")
             }
-            window.location.href= `/message/g/${res.data._id}`
+            let newGroup = [...allGroups, res.data]
+            setAllGroups(newGroup)
+            createGroupButton.current.disabled = false
+            navigate(`/message/g/${res.data._id}`)
         })
     }
     
@@ -90,7 +96,7 @@ const CreateGroupModal = ({allAccounts}) => {
                             </div>
                         </div>
                         <div className="col-12 mb-2">
-                            <button ref={createGroupButton} disabled={allGroupAccount.groupAccounts.length>0 && allGroupAccount.groupName !== ''? false:true} onClick={ createGroup } className="w-100 btn btn-primary">Create</button>
+                            <button data-bs-dismiss="modal" data-bs-target="#creatingGroupModal" aria-label="Close" ref={createGroupButton} disabled={allGroupAccount.groupAccounts.length>0 && allGroupAccount.groupName !== ''? false:true} onClick={ createGroup } className="w-100 btn btn-primary">Create</button>
                         </div>
                     </div>
                 </div>

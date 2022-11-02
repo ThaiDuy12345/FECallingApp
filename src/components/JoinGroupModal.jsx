@@ -1,10 +1,14 @@
 import { useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom'
+import $ from 'jquery';
 import axios from 'axios'
 import api from '../API/api'
-const JoinGroupModal = () => {
+const JoinGroupModal = ({allGroups, setAllGroups}) => {
     const groupID = useRef();
     const joinGroupButton = useRef()
+    const navigate = useNavigate()
+    const joinModal = useRef()
     const joinGroup = () => {
         joinGroupButton.current.disabled = true
         if(groupID.current.value === ''){
@@ -26,11 +30,14 @@ const JoinGroupModal = () => {
                 joinGroupButton.current.disabled = false
                 return
             }
-            window.location.href = `/message/g/${res.data._id}`
+            let newGroup = [...allGroups, res.data]
+            setAllGroups(newGroup)
+            joinGroupButton.current.disabled = false
+            navigate(`/message/g/${res.data._id}`)
         })
     }
     return(
-        <div className="modal fade" id="joinGroupModal" tabIndex="-1" aria-labelledby="joinGroupModal" aria-hidden="true">
+        <div ref={joinModal} className="modal fade" id="joinGroupModal" tabIndex="-1" aria-labelledby="joinGroupModal" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content text-dark">
                     <div className="modal-header">
@@ -41,7 +48,7 @@ const JoinGroupModal = () => {
                             <input ref={groupID} type="text" required placeholder="Insert group id" minLength="24" maxLength="24" size="24" className="fw-bold text-dark form-control form-control-lg"/>
                         </div>
                         <div className="col-12 mb-2">
-                            <button ref={joinGroupButton} onClick={joinGroup} className="w-100 btn btn-primary">Join</button>
+                            <button data-bs-dismiss="modal" data-bs-target="#joinGroupModal" ref={joinGroupButton} onClick={joinGroup} className="w-100 btn btn-primary" data-dismiss="modal">Join</button>
                         </div>
                     </div>
                 </div>

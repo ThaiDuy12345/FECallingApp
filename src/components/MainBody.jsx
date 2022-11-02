@@ -60,7 +60,7 @@ export default function MainBody() {
                 </div>
                 <div className="h-100 col-6 m-0 p-2">
                     <button className="w-100 h-100 p-0 btn btn-light fw-bold rounded dotText" data-bs-toggle="modal" data-bs-target="#creatingGroupModal">
-                    <FontAwesomeIcon icon="fa-solid fa-users-line" /> &nbsp;Creating group
+                        <FontAwesomeIcon icon="fa-solid fa-users-line" /> &nbsp;Creating group
                     </button>
                 </div>
             </div>
@@ -84,8 +84,8 @@ export default function MainBody() {
                         {messageState === true? <DMRender/>:<GroupRender/>}
                     </div>
                     {messageState === false? <CreateGroupRender/>:<></>}
-                    <CreateGroupModal allAccounts={allAccounts}/>
-                    <JoinGroupModal/>
+                    <CreateGroupModal allAccounts={allAccounts} allGroups={allGroups} setAllGroups={setAllGroups}/>
+                    <JoinGroupModal allGroups={allGroups} setAllGroups={setAllGroups}/>
                 </div>
                 <div className="col-8 h-100 border-start row m-0 p-0">
                     <Routes>
