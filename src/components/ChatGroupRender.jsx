@@ -35,7 +35,6 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                     .then(() => {})
                     .catch(() => {})
                 }
-                console.log(allMessages.length)
             }
         })
         return () => {
@@ -72,7 +71,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     }
     const sendPicture = (name) => {
         socket.current.emit('on-chat',{
-            type: 'dm',
+            type: 'g',
             chatDate: new Date(),
             content:  name,
             from_id: sessionStorage.getItem('AccountID'),
@@ -81,10 +80,11 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         })
     }
     const showPicture = () => {
+        if(addImage.current.value === "" || addImage.current.value === null) return
         const formData = new FormData();
         formData.append('file', addImage.current.files[0])
         formData.append('name', addImage.current.files[0].name)
-        axios.post(api.loadImage, formData,
+        axios.post(api.loadGroupImage, formData,
             {
                 headers: {
                   'Content-Type': "multipart/form-data"
@@ -94,9 +94,9 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
             if(res.data === null){
                 alert("Gửi ảnh thất bại")
             }
-            alert(res.data.name)
             sendPicture(res.data.name)
         }) 
+        addImage.current.value = ""
     }
     const submit = (event) => {
         if(event.which === 13) {
@@ -107,20 +107,6 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     }
     const MessageRender = (message) => {
         if(message.message.content === "The message was deleted!!"){
-            if(message.message.chatCategory === "1"){
-                return(
-                    <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'50%',width:'max-content', height:'max-content'}}>
-                        <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                            <div className="text-start">
-                                <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic dotText"><TimeSince date={(new Date(message.message.chatDate))}/></span>
-                            </div>
-                            <div className="text-start" style={{maxWidth:'100%'}}>
-                                <img class="rounded-5" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
-                            </div>
-                        </div>
-                    </div>
-                )
-            }
             return(
                 <div className="rounded m-0 mb-5 p-2 bg-secondary" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
@@ -134,31 +120,61 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                 </div>
             )
         }
-        if(message.message.from_id._id === sessionStorage.getItem('AccountID'))
-        return(
-            <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                    <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="dotText fst-italic text-light"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+        if(message.message.from_id._id === sessionStorage.getItem('AccountID')){
+            if(message.message.chatCategory === "1"){
+                return(
+                    <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'350px',width:'max-content', height:'max-content'}}>
+                        <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
+                            <div className="text-start">
+                                <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic dotText"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                            </div>
+                            <div className="text-start" style={{maxWidth:'100%'}}>
+                                <img className="rounded-3" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
+                            </div>
+                        </div>
                     </div>
-                    <div className="text-start" style={{maxWidth:'100%'}}>
-                        <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
+                )
+            }
+            return(
+                <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
+                    <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
+                        <div className="text-start">
+                            <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="dotText fst-italic text-light"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                        </div>
+                        <div className="text-start" style={{maxWidth:'100%'}}>
+                            <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        if(message.message.chatCategory === "1"){
+            return(
+                <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'350px',width:'max-content', height:'max-content'}}>
+                    <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
+                        <div className="text-start">
+                            <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                        </div>
+                        <div className="text-start" style={{maxWidth:'100%'}}>
+                            <img className="rounded-3" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        return (
+            <div className="rounded m-0 mb-5 p-2 bg-light" style={{ maxWidth: '100%', width: 'max-content', height: 'max-content' }}>
+                <div className="text-dark" style={{ marginLeft: 'auto', maxWidth: '100%', width: 'max-content', height: 'max-content' }}>
+                    <div className="text-start">
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))} /></span>
+                    </div>
+                    <div className="text-start" style={{ maxWidth: '100%' }}>
+                        <span style={{ maxWidth: '100%', wordWrap: 'break-word' }}>{message.message.content}</span>
                     </div>
                 </div>
             </div>
         )
-        return(
-            <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                    <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
-                    </div>
-                    <div className="text-start" style={{maxWidth:'100%'}}>
-                        <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
-                    </div>
-                </div>
-            </div>
-        )
+        
     }
     const leaveGroup = () => {
         axios.put(api.leaveGroup,{
@@ -231,9 +247,9 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
                     </div>
                     <div className="col-1 m-0 p-0">
                         <input ref={addImage} onChange={showPicture} type="file" style={{display:'none'}}/>
-                        <button className="btn btn-primary w-100" onClick={() => {
+                        <button className="fs-5 text-light m-0 p-0 border-0 h-100 w-100" style={{background:'none'}} onClick={() => {
                             addImage.current.click()
-                        }}>+</button>
+                        }}><FontAwesomeIcon icon="fa-solid fa-image" /></button>
                     </div>
                     <input ref={message} onKeyDown={event => submit(event)} onKeyUp={checkSendButton} className="col-7 m-auto fw-bold rounded-3" style={{transition:'0.1s',padding:'5px',background:'none', border:'0.5px solid white'}}/>
                     <button disabled={sendButton} onClick={sendMessage} className="col-2 btn m-auto btn-success text-center text-light rounded-3" style={{padding:'5px'}}><FontAwesomeIcon icon="fa-solid fa-paper-plane" /></button>

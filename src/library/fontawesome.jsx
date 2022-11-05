@@ -20,7 +20,8 @@ import {
     faPeopleGroup,
     faFaceSmile,
     faVolumeHigh,
-    faVolumeXmark
+    faVolumeXmark,
+    faImage
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
     fab,
@@ -42,5 +43,6 @@ library.add(
     faPeopleGroup,
     faFaceSmile,
     faVolumeHigh,
-    faVolumeXmark
+    faVolumeXmark,
+    faImage
 )

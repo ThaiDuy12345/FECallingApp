@@ -52,7 +52,8 @@ const apiList = {
     Return: The group that the account have leave
     */
     leaveGroup: `${host}Group/leaveGroup`,
-    loadImage: `${host}DMChat/loadImage`,
+    loadDMImage: `${host}DMChat/loadImage`,
+    loadGroupImage: `${host}GroupChat/loadImage`,
     getImage: `${host}image`,
 }
 
