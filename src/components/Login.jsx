@@ -1,12 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import api from '../API/api'
 export default function Login() {
-  const [account, setAccount] = useState({
-    email: '',
-    password: ''
-  })
   const loginButton = useRef()
   const email = useRef()
   const password = useRef()
@@ -27,14 +23,14 @@ export default function Login() {
     })
   }
   return (
-    <div className="Login w-50 m-auto center" style={{height: '100vh'}}>
+    <form onSubmit={Login} className="Login w-50 m-auto center" style={{height: '100vh'}}>
       <div className="row m-0 p-0">
         <div className="col-12 row m-0 mb-4 p-0">
           <b className="col m-auto center" style={{fontSize:'30px'}}>SiriBlogger</b>
         </div>
         <div className="col-12 row m-0 mb-4 p-0">
-          <input ref={email} className="form-control col-8 m-auto mb-2" type="text" placeholder="Email"/>
-          <input ref={password} className="form-control col-8 m-auto mb-2" type="password" placeholder="Mật khẩu"/>
+          <input required ref={email} className="form-control col-8 m-auto mb-2" type="text" placeholder="Email"/>
+          <input required ref={password} className="form-control col-8 m-auto mb-2" type="password" placeholder="Mật khẩu"/>
         </div>
         <div className="col-12 row m-0 mb-4 p-0">
           <button ref={loginButton} onClick={Login} className="btn btn-success col-12 m-auto font-weight-bold">Đăng nhập</button>
@@ -43,6 +39,6 @@ export default function Login() {
           <Link to="/forgot" className="text-primary col-6 m-auto" style={{textAlign:'left'}}>Quên mật khẩu</Link><Link to="/signin" className="col-6 m-auto text-primary" style={{textAlign:'right'}}>Chưa có tài khoản? Đăng ký ngay</Link>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
