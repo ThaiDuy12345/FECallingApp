@@ -123,7 +123,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         if(message.message.from_id._id === sessionStorage.getItem('AccountID')){
             if(message.message.chatCategory === "1"){
                 return(
-                    <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'350px',width:'max-content', height:'max-content'}}>
+                    <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'75%',width:'max-content', height:'max-content'}}>
                         <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                             <div className="text-start">
                                 <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic dotText"><TimeSince date={(new Date(message.message.chatDate))}/></span>
@@ -150,7 +150,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         }
         if(message.message.chatCategory === "1"){
             return(
-                <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'350px',width:'max-content', height:'max-content'}}>
+                <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'75%',width:'max-content', height:'max-content'}}>
                     <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
                         <div className="text-start">
                             <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
