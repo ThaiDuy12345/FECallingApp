@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
-import $ from 'jquery';
 import axios from 'axios'
 import api from '../API/api'
 const JoinGroupModal = ({allGroups, setAllGroups}) => {

@@ -2,7 +2,6 @@ import { useState, useRef } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
-import $ from 'jquery';
 import api from '../API/api'
 const CreateGroupModal = ({allAccounts, allGroups, setAllGroups}) => {
     const [allGroupAccount, setAllGroupAccount] = useState({
