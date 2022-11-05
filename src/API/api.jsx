@@ -1,6 +1,6 @@
 
 const host = "https://sirikakire-chat.herokuapp.com/api/"
-
+// const host = "http://localhost:5000/api/"
 const apiList = {
     /*
     Send: account's id store in the website session
@@ -51,7 +51,9 @@ const apiList = {
     Send: Account's Id and group's Id
     Return: The group that the account have leave
     */
-    leaveGroup: `${host}Group/leaveGroup`
+    leaveGroup: `${host}Group/leaveGroup`,
+    loadImage: `${host}DMChat/loadImage`,
+    getImage: `${host}image`,
 }
 
 
