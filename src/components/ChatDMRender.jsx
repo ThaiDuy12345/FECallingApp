@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useParams } from 'react-router-dom'
 import { VolumeRender, MuteVolumeRender } from './Volume'
+import ZoomImageModal from './ZoomImageModal'
 import TimeSince from '../library/TimeSince'
 import api from '../API/api'
 import axios from 'axios'
@@ -12,6 +13,7 @@ export default function ChatDMRender({Objects}){
     const socket = useRef()
     let { id } = useParams();
     const message = useRef();
+    const [imgSource, setImageSource] = useState()
     const element = useRef();
     const addImage = useRef();
     const [allMessages, setAllMessages] = useState([])
@@ -20,7 +22,7 @@ export default function ChatDMRender({Objects}){
     const [sendButton, setSendButton] = useState(true)
     useEffect(() => {
         element.current.scrollTop = element.current.scrollHeight;
-    })
+    },[allMessages])
     useEffect(() => {
         socket.current = io("https://sirikakire-chat.herokuapp.com/")
         socket.current.on('user-chat', (message) => {
@@ -142,9 +144,9 @@ export default function ChatDMRender({Objects}){
                             <div className="text-start">
                                 <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic dotText"><TimeSince date={(new Date(message.message.chatDate))}/></span>
                             </div>
-                            <div className="text-start" style={{maxWidth:'100%'}}>
+                            <button data-bs-toggle="modal" data-bs-target="#zoomImageModal" onClick={() => setImageSource(api.getImage + "/" + message.message.content)} className="text-start border-0 p-0 m-0 rounded-3" style={{maxWidth:'100%', background:'none'}}>
                                 <img className="rounded-3" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 )
@@ -169,9 +171,9 @@ export default function ChatDMRender({Objects}){
                         <div className="text-start">
                             <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
                         </div>
-                        <div className="text-start" style={{maxWidth:'100%'}}>
-                            <img className="rounded-3" alt="" src={ api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
-                        </div>
+                        <button data-bs-toggle="modal" data-bs-target="#zoomImageModal" onClick={() => setImageSource(api.getImage + "/" + message.message.content)} className="text-start border-0 p-0 m-0 rounded-3" style={{maxWidth:'100%', background:'none'}}>
+                            <img className="rounded-3" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
+                        </button>
                     </div>
                 </div>
             )
@@ -211,6 +213,7 @@ export default function ChatDMRender({Objects}){
                         allMessages.map(message => <MessageRender key={message._id} message={message}/>)
                     }
                 </div>
+                <ZoomImageModal imgSource={imgSource}/> 
             </div>
             <div className="w-100 center m-0 p-0" style={{height:'15%'}}>
                 <div className="text-start row m-auto" style={{width:'95%'}}>
