@@ -141,8 +141,8 @@ export default function ChatDMRender({Objects}){
                 return(
                     <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:(window.screen.width > window.screen.height? '50%':'75%'),width:'max-content', height:'max-content'}}>
                         <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                            <div className="text-start">
-                                <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic dotText"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                            <div className="text-start dotText">
+                                <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic"><TimeSince date={(new Date(message.message.chatDate))}/></span>
                             </div>
                             <button data-bs-toggle="modal" data-bs-target="#zoomImageModal" onClick={() => setImageSource(api.getImage + "/" + message.message.content)} className="text-start border-0 p-0 m-0 rounded-3" style={{maxWidth:'100%', background:'none'}}>
                                 <img className="rounded-3" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
@@ -154,8 +154,8 @@ export default function ChatDMRender({Objects}){
             return(
                 <div className="rounded m-0 mb-5 p-2 bg-mainColor" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                     <div className="text-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                        <div className="text-start">
-                            <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic dotText"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                        <div className="text-start dotText">
+                            <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}&nbsp;(You)</span> - <span className="text-light fst-italic"><TimeSince date={(new Date(message.message.chatDate))}/></span>
                         </div>
                         <div className="text-start" style={{maxWidth:'100%'}}>
                             <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
@@ -168,8 +168,8 @@ export default function ChatDMRender({Objects}){
             return(
                 <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:(window.screen.width > window.screen.height? '50%':'75%'),width:'max-content', height:'max-content'}}>
                     <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                        <div className="text-start">
-                            <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                        <div className="text-start dotText">
+                            <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#zoomImageModal" onClick={() => setImageSource(api.getImage + "/" + message.message.content)} className="text-start border-0 p-0 m-0 rounded-3" style={{maxWidth:'100%', background:'none'}}>
                             <img className="rounded-3" alt="" src={api.getImage + "/" + message.message.content} style={{maxWidth:'100%', wordWrap:'break-word'}}/>
@@ -181,8 +181,8 @@ export default function ChatDMRender({Objects}){
         return(
             <div className="rounded m-0 mb-5 p-2 bg-light" style={{maxWidth:'100%',width:'max-content', height:'max-content'}}>
                 <div className="text-dark" style={{marginLeft:'auto',maxWidth:'100%',width:'max-content', height:'max-content'}}>
-                    <div className="text-start">
-                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="dotText fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
+                    <div className="text-start dotText">
+                        <FontAwesomeIcon icon="fa-solid fa-user" />&nbsp;<span className="fw-bold dotText">{message.message.from_id.name}</span> - <span className="fst-italic text-secondary"><TimeSince date={(new Date(message.message.chatDate))}/></span>
                     </div>
                     <div className="text-start" style={{maxWidth:'100%'}}>
                         <span style={{maxWidth:'100%', wordWrap:'break-word'}}>{message.message.content}</span>
