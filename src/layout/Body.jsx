@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from '../components/Login'
 import Signin from '../components/Signin'
 import MainBody from '../components/MainBody'
+import ForgotPassword from '../components/ForgotPassword'
 import axios from 'axios'
 import api from '../API/api'
 export default function Body() {
@@ -40,6 +41,7 @@ export default function Body() {
       <Route path="/*" element={<CheckHome/>}/>
       <Route path="/login" element={<CheckLog/>} />
       <Route path="/signin" element={<CheckSign/>} />
+      <Route path="/forgot-password" element={<ForgotPassword/>}/>
     </Routes>
   )
 }

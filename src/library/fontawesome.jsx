@@ -1,14 +1,14 @@
 // import the library
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { 
-    faMagnifyingGlass, 
-    faCheck, 
-    faArrowLeft, 
-    faRightLong, 
-    faEye, 
-    faHeart, 
-    faUser, 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { fab } from "@fortawesome/free-brands-svg-icons"
+import {
+    faMagnifyingGlass,
+    faCheck,
+    faArrowLeft,
+    faRightLong,
+    faEye,
+    faHeart,
+    faUser,
     faForward,
     faUserGroup,
     faPaperPlane,
@@ -21,17 +21,20 @@ import {
     faFaceSmile,
     faVolumeHigh,
     faVolumeXmark,
-    faImage
-} from '@fortawesome/free-solid-svg-icons'
+    faImage,
+    faLock,
+    faKey,
+    faGear
+} from "@fortawesome/free-solid-svg-icons"
 library.add(
     fab,
-    faMagnifyingGlass, 
-    faCheck, 
-    faArrowLeft, 
-    faRightLong, 
-    faEye, 
-    faHeart, 
-    faUser, 
+    faMagnifyingGlass,
+    faCheck,
+    faArrowLeft,
+    faRightLong,
+    faEye,
+    faHeart,
+    faUser,
     faForward,
     faUserGroup,
     faPaperPlane,
@@ -44,5 +47,8 @@ library.add(
     faFaceSmile,
     faVolumeHigh,
     faVolumeXmark,
-    faImage
+    faImage,
+    faLock,
+    faKey,
+    faGear
 )

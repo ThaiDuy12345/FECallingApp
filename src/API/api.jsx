@@ -1,4 +1,3 @@
-
 const host = "https://sirikakire-chat.herokuapp.com/api/"
 // const host = "http://localhost:5000/api/"
 const apiList = {
@@ -6,7 +5,9 @@ const apiList = {
     Send: account's id store in the website session
     Return: the full account object that have the id
     */
-    getAccountWithId:`${host}Account/getAccountWithId/${sessionStorage.getItem("AccountID")}`,
+    getAccountWithId: `${host}Account/getAccountWithId/${sessionStorage.getItem(
+        "AccountID"
+    )}`,
     /*
     Send: email, password and username infor
     Return: the full account object that have just created
@@ -52,10 +53,31 @@ const apiList = {
     Return: The group that the account have leave
     */
     leaveGroup: `${host}Group/leaveGroup`,
+    /*
+    Send: Image to backend
+    Return: return the file name that have been stored in the backend
+    */
     loadDMImage: `${host}DMChat/loadImage`,
+    /*
+    Send: Image to backend
+    Return: return the file name that have been stored in the backend
+    */
     loadGroupImage: `${host}GroupChat/loadImage`,
+    /*
+    Send: Image file name
+    Return: render the file from backend
+    */
     getImage: `${host}image`,
+    /*
+    Send: Send an Image to check and create new password, sending through email
+    Return: Null if successful, false if unsuccessful
+    */
+    forgotPassword: `${host}Account/forgotPassword`,
+    /*
+    Send: Send account id and new password
+    Return: Null if successful, false if unsuccessful
+    */
+    updateNewPassword: `${host}Account/updateNewPassword`,
 }
-
 
 export default apiList
