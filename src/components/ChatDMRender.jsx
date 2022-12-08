@@ -25,7 +25,7 @@ export default function ChatDMRender({Objects}){
     },[allMessages])
     useEffect(() => {
         socket.current = io("https://sirikakire-chat.herokuapp.com/")
-        socket.current.on('user-chat', (message) => {
+        socket.current.on('user-chat', async (message) => {
             if(
                 (
                     message.from_id._id === sessionStorage.getItem('AccountID')
@@ -42,9 +42,7 @@ export default function ChatDMRender({Objects}){
                 setAllMessages(oldArray => [...oldArray, message])
                 if(message.from_id._id !== sessionStorage.getItem('AccountID') && volume === true){
                     const audio = new Audio(sound);
-                    audio.play()
-                    .then(() => console.log("play audio successfully"))
-                    .catch(() => console.log("play audio failed"))
+                    await audio.play()
                 }
             }
         })
