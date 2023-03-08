@@ -25,7 +25,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         element.current.scrollTop = element.current.scrollHeight
     })
     useEffect(() => {
-        socket.current = io("https://sirikakire-chat.herokuapp.com/")
+        socket.current = io("http://localhost:5000/")
         socket.current.on('user-chat', (message) => {
             if(
                 message.to_id === id

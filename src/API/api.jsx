@@ -1,5 +1,5 @@
-const host = "https://sirikakire-chat.herokuapp.com/api/"
-// const host = "http://localhost:5000/api/"
+// const host = "https://sirikakire-chat.herokuapp.com/api/"
+const host = "http://localhost:5000/api/"
 const apiList = {
     /*
     Send: account's id store in the website session

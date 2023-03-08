@@ -24,7 +24,7 @@ export default function ChatDMRender({Objects}){
         element.current.scrollTop = element.current.scrollHeight;
     },[allMessages])
     useEffect(() => {
-        socket.current = io("https://sirikakire-chat.herokuapp.com/")
+        socket.current = io("http://localhost:5000/")
         socket.current.on('user-chat', async (message) => {
             if(
                 (
