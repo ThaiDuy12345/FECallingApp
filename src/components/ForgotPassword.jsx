@@ -34,7 +34,6 @@ export default function Login() {
     }
     forgotPasswordButton.current.disabled = false
   }
-  const submitToServer = async () => {}
 
   //find a properly way to validate email pattern and return boolean function.
   // Source: https://stackoverflow.com/a/43692170 .

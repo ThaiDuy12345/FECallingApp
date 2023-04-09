@@ -41,11 +41,7 @@ export default function MainBody() {
             .then((res) => {
                 setAllGroups(res.data)
             })
-        axios.get(api.getAccountWithId,{
-            headers: {
-                withCredentials: true
-            }
-        }).then((res) => {
+        axios.get(api.getAccountWithId).then((res) => {
             setMainAccount(res.data)
         })
     }, [])
