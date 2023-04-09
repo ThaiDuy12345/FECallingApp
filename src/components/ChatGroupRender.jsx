@@ -25,7 +25,8 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         element.current.scrollTop = element.current.scrollHeight
     })
     useEffect(() => {
-        socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api/socket.io/",{
+        socket.current = io("https://sirichattingapp-serverside.netlify.app",{
+            path: '/.netlify/functions/api/socket.io',
             transports: ['websocket'],
             withCredentials: true
         })
