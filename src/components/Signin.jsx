@@ -19,12 +19,20 @@ export default function Signin() {
     axios.post(api.getAccountWithEmailAndPassword, {
         email: account.email,
         password: account.password
+    },{
+      headers: {
+          withCredentials: true
+      }
     }).then(res => {
       if(res.data === null){
         axios.post(api.createAnAccount, {
           email: account.email,
           password: account.password,
           username: username.current.value
+        },{
+          headers: {
+              withCredentials: true
+          }
         }).then(res => {
           if(res.data === null){
             alert("Failed to create new account, please try again")

@@ -29,6 +29,10 @@ const ChangePasswordModal = () => {
         const result = await axios.put(api.updateNewPassword, {
             _id: sessionStorage.getItem("AccountID"),
             password: changePassword.current.value,
+        },{
+            headers: {
+                withCredentials: true
+            }
         })
         changePassword.current.value = ''
         confirmPassword.current.value = ''

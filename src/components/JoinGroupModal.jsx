@@ -23,6 +23,10 @@ const JoinGroupModal = ({allGroups, setAllGroups}) => {
         axios.put(api.joinGroup,{
             _id: sessionStorage.getItem("AccountID"),
             group_id: groupID.current.value 
+        },{
+            headers: {
+                withCredentials: true
+            }
         }).then(res => {
             if(res.data === null){
                 alert("Failed to join, group you join may not exist, please try again")

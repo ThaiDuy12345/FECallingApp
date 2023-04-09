@@ -25,7 +25,9 @@ export default function ChatDMRender({Objects}){
     },[allMessages])
     useEffect(() => {
         socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api",{
-            withCredentials: true
+            headers: {
+                withCredentials: true
+            }
         })
         socket.current.on('user-chat', async (message) => {
             if(
@@ -58,7 +60,9 @@ export default function ChatDMRender({Objects}){
             user1_id: to,
             user2_id: id
         },{
-            withCredentials: true
+            headers: {
+                withCredentials: true
+            }
         }).then(res => {
             setAllMessages(res.data)
         })

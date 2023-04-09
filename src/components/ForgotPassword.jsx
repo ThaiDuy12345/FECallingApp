@@ -19,6 +19,10 @@ export default function Login() {
     const submitEmail = email.current.value
     const value = await axios.post(api.forgotPassword, {
       email: submitEmail,
+    },{
+      headers: {
+          withCredentials: true
+      }
     })
 
     if (value.data !== null) alert(value.data.message)

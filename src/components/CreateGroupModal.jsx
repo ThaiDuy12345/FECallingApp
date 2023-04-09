@@ -52,6 +52,10 @@ const CreateGroupModal = ({allAccounts, allGroups, setAllGroups}) => {
             _id: sessionStorage.getItem("AccountID"),
             groupName: allGroupAccount.groupName,
             groupAccounts: allGroupAccount.groupAccounts
+        },{
+            headers: {
+                withCredentials: true
+            }
         }).then(res => {
             if(res.data === null){
                 alert("Failed to create new group, please try again")

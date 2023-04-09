@@ -26,7 +26,9 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     })
     useEffect(() => {
         socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api",{
-            withCredentials: true
+            headers: {
+                withCredentials: true
+            }
         })
         socket.current.on('user-chat', (message) => {
             if(
@@ -50,6 +52,10 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         axios.post(api.getGroupMessagesChat, {
             user1_id: to,
             user2_id: id
+        },{
+            headers: {
+                withCredentials: true
+            }
         }).then(res => {
             setAllMessages(res.data)
         })
@@ -91,7 +97,8 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         axios.post(api.loadGroupImage, formData,
             {
                 headers: {
-                  'Content-Type': "multipart/form-data"
+                  'Content-Type': "multipart/form-data",
+                  withCredentials: true
                 }
             }
         ).then(res => {
@@ -184,6 +191,10 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         axios.put(api.leaveGroup,{
             _id: sessionStorage.getItem("AccountID"),
             group_id: id
+        },{
+            headers: {
+                withCredentials: true
+            }
         }).then(res => {
             if(res.data === null){
                 alert("Failed to leave the group, please try again")

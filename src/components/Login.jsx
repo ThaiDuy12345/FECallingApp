@@ -12,6 +12,10 @@ export default function Login() {
       .post(api.getAccountWithEmailAndPassword, {
         email: email.current.value,
         password: password.current.value,
+      },{
+        headers: {
+            withCredentials: true
+        }
       })
       .then((res) => {
         if (res.data === null) {
