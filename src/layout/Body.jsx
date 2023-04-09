@@ -12,7 +12,9 @@ export default function Body() {
       console.log('null sessionStorage')
       return false
     }else{
-      axios.get(api.getAccountWithId)
+      axios.get(api.getAccountWithId,{
+        withCredentials: true
+      })
       .then(res => {
         if (res.data == null) {
           console.log('id not found') 

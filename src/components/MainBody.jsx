@@ -23,7 +23,9 @@ export default function MainBody() {
             .post(api.getAllAccountsExceptId, {
                 _id: sessionStorage.getItem("AccountID"),
             },{
-                withCredentials: true
+                headers: {
+                    withCredentials: true
+                }
             })
             .then((res) => {
                 setAllAccounts(res.data)
