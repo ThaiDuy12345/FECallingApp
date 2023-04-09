@@ -1,4 +1,4 @@
-const host = "https://sirichattingapp-serverside.netlify.app"
+const host = "https://sirichattingapp-serverside.netlify.app/.netlify/functions/api/"
 //const host = "http://localhost:5000/api/"
 const apiList = {
     /*
