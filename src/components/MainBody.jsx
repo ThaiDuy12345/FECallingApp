@@ -22,6 +22,8 @@ export default function MainBody() {
         axios
             .post(api.getAllAccountsExceptId, {
                 _id: sessionStorage.getItem("AccountID"),
+            },{
+                withCredentials: true
             })
             .then((res) => {
                 setAllAccounts(res.data)

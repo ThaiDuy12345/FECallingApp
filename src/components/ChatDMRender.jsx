@@ -57,6 +57,8 @@ export default function ChatDMRender({Objects}){
         axios.post(api.getDMMessagesChat, {
             user1_id: to,
             user2_id: id
+        },{
+            withCredentials: true
         }).then(res => {
             setAllMessages(res.data)
         })
@@ -124,7 +126,8 @@ export default function ChatDMRender({Objects}){
         axios.post(api.loadDMImage, formData,
             {
                 headers: {
-                  'Content-Type': "multipart/form-data"
+                  'Content-Type': "multipart/form-data",
+                  withCredentials: true
                 }
             }
         ).then(res => {
