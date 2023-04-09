@@ -22,6 +22,10 @@ export default function MainBody() {
         axios
             .post(api.getAllAccountsExceptId, {
                 _id: sessionStorage.getItem("AccountID"),
+            },{
+                headers: {
+                    withCredentials: true
+                }
             })
             .then((res) => {
                 setAllAccounts(res.data)
@@ -37,7 +41,11 @@ export default function MainBody() {
             .then((res) => {
                 setAllGroups(res.data)
             })
-        axios.get(api.getAccountWithId).then((res) => {
+        axios.get(api.getAccountWithId,{
+            headers: {
+                withCredentials: true
+            }
+        }).then((res) => {
             setMainAccount(res.data)
         })
     }, [])
