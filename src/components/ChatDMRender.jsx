@@ -25,6 +25,7 @@ export default function ChatDMRender({Objects}){
     },[allMessages])
     useEffect(() => {
         socket.current = io("https://siri-real-time-chat-server-side.vercel.app/",{
+            transports: ["websocket"],
             withCredentials: true
         })
         socket.current.on('user-chat', async (message) => {
