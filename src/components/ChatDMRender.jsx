@@ -24,7 +24,7 @@ export default function ChatDMRender({Objects}){
         element.current.scrollTop = element.current.scrollHeight;
     },[allMessages])
     useEffect(() => {
-        socket.current = io("https://siri-real-time-chat-server-side.vercel.app",{
+        socket.current = io("https://siri-real-time-chat-server-side-8b69muwcf-thaiduy12345.vercel.app/",{
             path: "/socket.io",
             withCredentials: true,
             transports: ['websocket', 'polling', 'flashsocket']
