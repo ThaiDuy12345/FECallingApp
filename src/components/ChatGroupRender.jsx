@@ -26,6 +26,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     })
     useEffect(() => {
         socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api",{
+            transports: ['websocket'],
             withCredentials: true
         })
         socket.current.on('user-chat', (message) => {
