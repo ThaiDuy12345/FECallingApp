@@ -24,7 +24,7 @@ export default function ChatDMRender({Objects}){
         element.current.scrollTop = element.current.scrollHeight;
     },[allMessages])
     useEffect(() => {
-        socket.current = io("https://sirichattingapp-serverside.netlify.app")
+        socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api/")
         socket.current.on('user-chat', async (message) => {
             if(
                 (
