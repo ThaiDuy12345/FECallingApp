@@ -25,7 +25,7 @@ export default function ChatDMRender({Objects}){
     },[allMessages])
     useEffect(() => {
         socket.current = io("https://sirichattingapp-serverside.netlify.app",{
-            path: '/.netlify/functions/api/socket.io',
+            path: '/.netlify/functions/api',
             transports: ['websocket'],
             withCredentials: true
         })
