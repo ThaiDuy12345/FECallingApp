@@ -26,9 +26,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     })
     useEffect(() => {
         socket.current = io("https://siri-real-time-chat-app-server-side.onrender.com/",{
-            path: "/socket.io",
             withCredentials: true,
-            transports: ['websocket', 'polling', 'flashsocket']
         })
         socket.current.on('user-chat', (message) => {
             if(

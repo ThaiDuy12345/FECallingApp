@@ -25,9 +25,7 @@ export default function ChatDMRender({Objects}){
     },[allMessages])
     useEffect(() => {
         socket.current = io("https://siri-real-time-chat-app-server-side.onrender.com/",{
-            path: "/socket.io",
             withCredentials: true,
-            transports: ['websocket', 'polling', 'flashsocket']
         })
         socket.current.on('user-chat', async (message) => {
             if(
