@@ -1,4 +1,4 @@
-const host = "https://sirichattingapp-serverside.netlify.app/.netlify/functions/api/"
+const host = "https://siri-real-time-chat-server-side.vercel.app/"
 //const host = "http://localhost:5000/api/"
 const apiList = {
     /*
