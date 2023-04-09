@@ -1,4 +1,4 @@
-const host = "https://siri-real-time-chat-server-side.vercel.app/api/"
+const host = "https://siri-real-time-chat-app-server-side.onrender.com/api/"
 //const host = "http://localhost:5000/api/"
 const apiList = {
     /*

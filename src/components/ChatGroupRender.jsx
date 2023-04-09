@@ -25,7 +25,7 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         element.current.scrollTop = element.current.scrollHeight
     })
     useEffect(() => {
-        socket.current = io("https://siri-real-time-chat-server-side.vercel.app/",{
+        socket.current = io("https://siri-real-time-chat-app-server-side.onrender.com/",{
             path: "/socket.io",
             withCredentials: true,
             transports: ['websocket', 'polling', 'flashsocket']
