@@ -26,7 +26,8 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
     })
     useEffect(() => {
         socket.current = io("https://siri-real-time-chat-server-side.vercel.app",{
-            withCredentials: true
+            withCredentials: true,
+            transports: ['websocket', 'polling', 'flashsocket']
         })
         socket.current.on('user-chat', (message) => {
             if(
