@@ -25,7 +25,9 @@ export default function ChatGroupRender({Objects, allGroups, setAllGroups}){
         element.current.scrollTop = element.current.scrollHeight
     })
     useEffect(() => {
-        socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api/")
+        socket.current = io("https://sirichattingapp-serverside.netlify.app/.netlify/functions/api/",{
+            withCredentials: true
+        })
         socket.current.on('user-chat', (message) => {
             if(
                 message.to_id === id
